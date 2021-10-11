@@ -1,0 +1,82 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ---------------------------- FIND AN AGENT PAGE -------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model List<Agent>
+@{ ViewData["Title"] = "Find an Agent"; }
+
+@*// ----------------------------- Heading for Find an Agent page ---------------------------------- //*@
+
+<div class="text-center">
+    <h1 class="display-4">Find a Travel Agent</h1>
+</div>
+
+<br />
+
+@*// ----------------------------- Using data from Agent model ---------------------------------- //*@
+
+@foreach (var agent in Model)
+{
+    <div class="tte-agent-title-container">
+
+        @*// ----------------------------- Agent Profile Image  ---------------------------------- //*@
+
+        <div class="tte-profile-image">
+            <img src="./images/@agent.AgtPicture" alt="@agent.AgtFullName">
+        </div>
+
+        @*// ----------------------------- Agent Information  ---------------------------------- //*@
+
+        <div class="tte-text-content">
+            <div class="tte-archive-title">@agent.AgtFullName</div>
+            <div class="tte-archive-contact-info">@agent.AgtPosition</div>
+            <div class="tte-archive-contact-info">
+                <i class="fa fa-envelope" style="font-size:15px"></i>
+                <a href="mailto:@agent.AgtEmail">  @agent.AgtEmail</a>
+            </div>
+
+        <div class="tte-archive-contact-info">
+            <i class="fa fa-phone" style="font-size:18px"></i>
+            <a href="tel:@agent.AgtBusPhone">@agent.AgtBusPhone</a>
+        </div>
+
+        @*// ----------------------- Agent Location as per Agency ID ----------------------------- //*@
+
+        <div class="tte-archive-contact-info">
+            <i class="fa fa-map-marker" style="font-size:18px"></i>
+            @if (@agent.AgencyId == 1)
+            {
+                <span> Calgary, AB </span> 
+            }
+            else if (@agent.AgencyId == 2)
+            {
+                <span> Okotoks, AB </span>
+            }
+        </div>
+    </div>
+
+    @*// ----------------------- Button to go for more Agent Details ----------------------------- //*@
+        
+    <div class="tte-full-bio-button">
+        <i style='font-size:24px' class='fas'>
+            <a asp-controller="Agent" asp-action="Details" asp-route-id="@agent.AgentId">
+                >
+            </a>
+        </i>
+    </div>
+
+</div>
+
+<br />
+}

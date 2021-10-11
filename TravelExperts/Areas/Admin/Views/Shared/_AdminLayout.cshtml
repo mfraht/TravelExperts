@@ -1,0 +1,78 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ------------------------------ LAYOUT FOR ADMIN PAGE --------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@{ Layout = "_Layout";
+
+    var current = ViewContext.RouteData.Values["controller"]?.ToString(); }
+
+
+@*// ----------------------------- Using JQuery Scripts ---------------------------------- //*@
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+@*// ------------------------------- Tabs on Admin View ---------------------------------- //*@
+
+<ul class="nav nav-tabs mt-2 mb-3">
+
+    @*// ------------------------- Tab 1: Manage Packages -------------------------------- //*@
+
+    <li class="nav-item">
+        <a asp-action="Index" asp-controller="Package" class="nav-link @TravelExperts.Models.Nav.Active("Package", current)">
+            Manage Packages
+        </a>
+    </li>
+
+    @*// ------------------------- Tab 2: Manage Agents ---------------------------------- //*@
+
+    <li class="nav-item">
+        <a asp-action="Index" asp-controller="Agent" class="nav-link @TravelExperts.Models.Nav.Active("Agent", current)">
+            Manage Agents
+        </a>
+    </li>
+
+    @*// ------------------------- Tab 3: Manage Agencies -------------------------------- //*@
+
+    <li class="nav-item">
+        <a asp-action="Index" asp-controller="Agency" class="nav-link @TravelExperts.Models.Nav.Active("Agencies", current)">
+            Manage Agencies
+        </a>
+    </li>
+
+    @*// ------------------------- Tab 4: Manage Users ---------------------------------- //*@
+
+    <li class="nav-item">
+        <a asp-action="Index" asp-controller="User" class="nav-link @TravelExperts.Models.Nav.Active("User", current)">
+            Manage Users
+        </a>
+    </li>
+
+    @*// ------------------- Tab 5: Monitor Business Performance ------------------------ //*@
+
+    <li class="nav-item">
+        <a href="https://app.powerbi.com/groups/me/reports/6fb95cf6-97d2-4a7b-aca8-f9d9dca8f066" class="nav-link @TravelExperts.Models.Nav.Active("User", current)">
+            Monitor Business Performance
+        </a>
+    </li>
+
+</ul>
+
+
+@*// --------------- Render Content of the tab as per tab selection ----------------------- //*@
+
+@RenderBody()

@@ -1,0 +1,132 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // -------------------------------- YOUR CART VIEW -------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model CartViewModel
+
+@{ ViewData["Title"] = " | Cart"; }
+
+@*// -------------------- Heading for View Your Cart page ------------------------------ //*@
+
+<h1>Your Cart</h1>
+
+
+@*// -------------------- Box for Displaying Sub-Total ------------------------------ //*@
+
+<form asp-action="Clear" method="post">
+    <ul class="list-group mb-4">
+        <li class="list-group-item">
+            <div class="row">
+
+                @*// -------------------- SubTotal Data ------------------------------ //*@
+
+                <div class="col">
+                    Sub-Total: @Model.Subtotal.ToString("c")
+                </div>
+
+                <div class="col">
+                    <div class="float-right">
+
+                        @*// -------------------- Button for Clear Cart ------------------------------ //*@
+                        <button type="submit" class="btn btn-primary">Clear Cart</button>
+
+                        @*// -------------------- Button to go Back to Shopping ------------------------------ //*@
+                        <a asp-action="Index" asp-controller="Package" asp-all-route-data="@Model.PackageGridRoute" class="btn btn-primary" style="text-decoration: none;">Back to Shopping</a>
+                    </div>
+                </div>
+
+            </div>
+        </li>
+    </ul>
+</form>
+
+@*// -------------------- Table for Cart Items ------------------------------ //*@
+
+<form asp-action="Remove" method="post">
+    <table class="table">
+ 
+        @*// -------------------- Table Header for Cart Items ------------------------------ //*@
+        <thead class="thead-dark">
+            <tr>
+                <th>Package ID</th>
+                <th>Package Name</th>
+                <th>Price</th>
+                <th>Number of Travellers</th>
+                <th>Sub-Total</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @*// -------------------- Table Body for Cart Items ------------------------------ //*@
+
+        <tbody>
+        
+            @*// ---------------- Using Data from Cart Item Model -------------------------- //*@
+        
+            @foreach (CartItem item in Model.List)
+            {
+            <tr>
+
+                @*// ---------------- Package ID information -------------------------- //*@
+
+                <td>
+                    <a asp-action="Details" asp-controller="Package"
+                       asp-route-id="@item.Package.PackageId"
+                       asp-route-slug="@item.Package.PkgName.Slug()">
+                        @item.Package.PackageId
+                    </a>
+                </td>
+
+                @*// ---------------- Package Name information -------------------------- //*@
+
+                <td>
+                    <p>
+                        <a asp-action="Details" asp-controller="Package"
+                           asp-route-id="@item.Package.PackageId"
+                           asp-route-slug="@item.Package.PkgName.Slug()">
+                            @item.Package.PkgName
+                        </a>
+                    </p>
+                </td>
+
+                <td>@item.Package.PkgBasePrice.ToString("c")</td>
+                <td>@item.Quantity</td>
+                <td>@item.Subtotal.ToString("c")</td>
+
+                <td>
+                    <div class="float-right">
+
+                        @*// ---------------------- Button for Check out ---------------------------------- //*@
+
+                        <a asp-action="Add" asp-controller="Checkout" asp-route-id="@item.Package.PackageId" class="btn btn-primary">Checkout</a>
+
+                        @*// ---------------- Button for Editing items in the Cart -------------------------- //*@
+
+                        <a asp-action="Edit" asp-controller="Cart"
+                           asp-route-id="@item.Package.PackageId"
+                           asp-route-slug="@item.Package.PkgName.Slug()"
+                           class="btn btn-primary">Edit</a>
+
+                        @*// ---------------- Button for Removing items from Cart -------------------------- //*@
+
+                        <button type="submit" name="id" value="@item.Package.PackageId" class="btn btn-primary">
+                            Remove
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</form>

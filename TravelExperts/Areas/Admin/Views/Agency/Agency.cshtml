@@ -1,0 +1,139 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ------------------------------ AGENCY VIEW FROM ADMIN -------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model Agency
+
+@{  // ------------------------------ AGENCY VIEW FROM ADMIN -------------------------- //
+    // --------------------------- Used for add, edit, and delete --------------------- //
+    // ----------- Which one is determined by the "action" method name. --------------- //
+
+    var action = ViewContext.RouteData.Values["action"].ToString().Capitalize();
+
+    ViewData["Title"] = $" | {action} Agency"; }
+
+
+@*// ----------------------------- Heading for Agency Form page ---------------------------------- //*@
+
+<h1>@action Agency</h1>
+
+
+@*// --------------------------- Form for Adding / Editing Agency Data --------------------------- //*@
+
+<form asp-action="@action" asp-area="Admin" method="post">
+
+    <input type="hidden" asp-for="AgencyId" />
+
+    @*// --------------------------- Textbox for Agency Name ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Agency City:</label></div>
+
+        @*// -------If deleting, display title in a label and put value in hidden field for delete message-------- //*@
+        @*// -------Otherwise, provide a text box ---------------------------------------------------------------- //*@
+
+        @if (Operation.IsDelete(action))
+        {
+            <div class="col-sm-4"><label>@Model.AgncyCity</label></div>
+                <input type="hidden" asp-for="AgncyCity" /> 
+         }
+         else
+         {
+            <div class="col-sm-4">
+                <input type="text" asp-for="AgncyCity" class="form-control" />
+            </div>
+            <div class="col-sm-6">
+                <span asp-validation-for="AgncyCity" class="text-danger"></span>
+            </div>
+         }
+    </div>
+
+
+    @*// -------If not deleting, display form for adding / editing Agency List-------- //*@
+    @if (!Operation.IsDelete(action))
+    {
+        @*// --------------------------- Textbox for Agency ID --------------------------- //*@
+
+                    <div class="form-group row">
+                        <div class="col-sm-2"><label>Agency ID:</label></div>
+                        <div class="col-sm-4">
+                            <input type="text" asp-for="AgencyId" class="form-control" />
+                        </div>
+                        <div class="col-sm-6">
+                            <span asp-validation-for="AgencyId" class="text-danger"></span>
+                        </div>
+                    </div> 
+                    
+                    @*// --------------------------- Textbox for Agency Address --------------------------- //*@
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2"><label>Address:</label></div>
+                                        <div class="col-sm-4">
+                                            <input type="text" asp-for="AgncyAddress" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <span asp-validation-for="AgncyAddress" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    @*// --------------------------- Textbox for Agency Province --------------------------- //*@
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2"><label>Province:</label></div>
+                                                        <div class="col-sm-4">
+                                                            <input type="text" asp-for="AgncyProv" class="form-control" />
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <span asp-validation-for="AgncyProv" class="text-danger"></span>
+                                                        </div>
+                                                    </div> 
+                                                    
+                                                    @*// --------------------------- Textbox for Agency Country --------------------------- //*@
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2"><label>Country:</label></div>
+                                                                        <div class="col-sm-4">
+                                                                            <input type="text" asp-for="AgncyCountry" class="form-control" />
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <span asp-validation-for="AgncyCountry" class="text-danger"></span>
+                                                                        </div>
+                                                                    </div> 
+                                                                    
+                                                                    @*// --------------------------- Textbox for Agency Contact Number --------------------------- //*@
+
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-2"><label>Contact Number:</label></div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="text" asp-for="AgncyPhone" class="form-control" />
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <span asp-validation-for="AgncyPhone" class="text-danger"></span>
+                                                                                        </div>
+                                                                                    </div> 
+                                                                                    
+                                                                                    } 
+    
+    @*// ---------------------------- Action Button for the form ---------------------------------- //*@
+
+    <div class="row">
+        <div class="col-sm-4 offset-sm-2">
+            <button type="submit" class="btn btn-primary">@action</button>
+
+            @*// -------Return user to main admin page after add or to search page otherwise-------- //*@
+
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+@model List< ProductsSupplier >
+@{
+    ViewData["Title"] = "Products Supplier list";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Package list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ProductSupplierId</th>
+                <th scope="col">ProductId</th>
+                <th scope="col">SupplierId</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var productsSupplier in Model)
+            {
+            <tr>
+                <td>@productsSupplier.ProductSupplierId</td>
+                <td>@productsSupplier.ProductId</td>
+                <td>@productsSupplier.SupplierId</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

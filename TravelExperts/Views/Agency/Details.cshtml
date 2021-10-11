@@ -1,0 +1,33 @@
+﻿@model Agency
+
+@{
+    ViewData["Title"] = " | Agency Details";
+}
+
+<h1>Agency Details</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th scope="col">AgencyId</th>
+            <th scope="col">Agency Address</th>
+            <th scope="col">Agency City</th>
+            <th scope="col">Agency Province</th>
+            <th scope="col">Agency Postal</th>
+            <th scope="col">Agency Country</th>
+            <th scope="col">Agency Phone</th>
+            <th scope="col">Agency Fax</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.AgencyId</td>
+            <td>@Model.AgncyAddress</td>
+            <td>@Model.AgncyCity</td>
+            <td>@Model.AgncyProv</td>
+            <td>@Model.AgncyPostal</td>
+            <td>@Model.AgncyCountry</td>
+            <td>@Model.AgncyPhone</td>
+            <td>@Model.AgncyFax</td>
+        </tr>
+</table>

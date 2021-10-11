@@ -1,0 +1,150 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ----------------------------------- MANAGE USERS ------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model UserViewModel
+@{ ViewData["Title"] = " | Manage Users"; }
+
+
+@*// ----------------------------- Heading for Manage Users section ---------------------------------- //*@
+
+<h1 class="mb-2">Manage Users</h1>
+
+@*// ------------------------------ Button for Adding new User ------------------------------------ //*@
+
+<h5 class="mt-2"><a asp-controller="Account" asp-action="Register" asp-area="" class="btn btn-primary">Add a User</a></h5>
+
+
+@*// --------------------------------- Table for Manage User ------------------------------------ //*@
+
+<table class="table table-bordered table-striped table-sm">
+
+    @*// ----------------------------- Manage User Table Header ---------------------------------- //*@
+
+    <thead>
+        <tr><th>Username</th><th>Roles</th><th></th><th></th><th></th></tr>
+    </thead>
+
+    @*// ----------------------------- Manage User Table Body ------------------------------------ //*@
+
+    <tbody>
+
+        @*// ----------------------------- Using data from User Model ---------------------------------- //*@
+
+        @if (Model.Users.Count() == 0) @*// ---------- If no User account --------------- //*@
+        {
+            <tr><td colspan="5">There are no user accounts.</td></tr> 
+        }
+        else
+        {
+            @foreach (TravelExperts.Models.User user in Model.Users)
+            {
+            <tr>
+                <td>@user.UserName</td>
+                <td>
+                    @foreach (string roleName in user.RoleNames)
+                    {
+                        <div>@roleName</div>}
+                </td>
+
+                @*// ----------------------------- Delete User button in Manage Users Table ---------------------------------- //*@
+
+                <td>
+                    <form method="post" asp-action="Delete" asp-route-id="@user.Id">
+                        <button type="submit" class="btn btn-primary">
+                            Delete User
+                        </button>
+                    </form>
+                </td>
+
+
+                @*// ----------------------------- Add To Admin button in Manage Users Table ---------------------------------- //*@
+
+                <td>
+                    <form method="post" asp-action="AddToAdmin" asp-route-id="@user.Id">
+                        <button type="submit" class="btn btn-primary">
+                            Add To Admin
+                        </button>
+                    </form>
+                </td>
+
+
+                @*// ----------------------------- Remove From Admin button in Manage Users Table ---------------------------------- //*@
+
+                <td>
+                    <form method="post" asp-action="RemoveFromAdmin" asp-route-id="@user.Id">
+                        <button type="submit" class="btn btn-primary">
+                            Remove From Admin
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+@*// ----------------------------- Heading for Manage Roles section ---------------------------------- //*@
+
+<h1 class="mb-2">Manage Roles</h1>
+
+@if (Model.Roles.Count() == 0)
+{
+    @*// ----------------------------- Create Admin Role button in Manage Roles Table ---------------------------------- //*@
+
+    <form method="post" asp-action="CreateAdminRole">
+        <button type="submit" class="btn btn-primary">
+            Create Admin Role
+        </button>
+    </form> 
+}
+else
+{
+    @*// --------------------------------- Table for Manage Roles ------------------------------------ //*@
+
+    <table class="table table-bordered table-striped table-sm">
+
+        @*// ----------------------------- Manage Roles Table Header ---------------------------------- //*@
+
+        <thead>
+            <tr><th>Role</th><th></th></tr>
+        </thead>
+
+        @*// ----------------------------- Manage Roles Table Body ------------------------------------ //*@
+
+        <tbody>
+
+            @*// ----------------------------- Using data from User Model ---------------------------------- //*@
+                                    
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td>@role.Name</td>
+
+                    @*// ----------------------------- Delete Role button in Manage Roles Table ------------------------------------ //*@
+
+                    <td>
+                        <form method="post" asp-action="DeleteRole" asp-route-id="@role.Id">
+                            <button type="submit" class="btn btn-primary">
+                                Delete Role
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

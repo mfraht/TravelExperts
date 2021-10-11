@@ -1,0 +1,50 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ------------------------ PACKAGE DETAILS VIEW ---------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model Package
+
+@{ ViewData["Title"] = " | Package Details"; }
+
+@*// -------------------- Heading for Package Details page ------------------------------ //*@
+
+<h1>Package Details</h1>
+
+@*// ------------- Cards for Displaying Selected Package Details -------------------------- //*@
+
+<div class="card mb-3">
+
+    @*// -------------------- Heading for Package Name ---------------------------------- //*@
+    <h1 class="card-title; text-center"> @Model.PkgName </h1>
+
+    @*// -------------------- Image of the Package ---------------------------------- //*@
+    <img src="~/images/@Model.image" class="img-fluid center-block" style="width: fit-content; padding: 10px 100px 0px 100px ; border-radius: 20px 20px 20px 20px" alt="...">
+
+    @*// -------------------- Package Details Information ---------------------------------- //*@
+    <div class="card-body; text-center">
+        <p class="card-text">Start Date: @Model.PkgStartDate End Date: @Model.PkgStartDate</p>
+        <p class="card-text">@Model.PkgDesc </p>
+        <h3 class="card-text"><small class="text-muted">Price: $@Model.PkgBasePrice</small></h3>
+    </div>
+
+</div>
+
+
+@*// -------------------- Button for Adding Package to Cart ---------------------------------- //*@
+
+<form asp-action="Add" asp-controller="Cart" method="post" style="align-items: center; justify-content: center; text-align: center;">
+    <button type="submit" name="id" value="@Model.PackageId" class="btn btn-primary">
+        Add To Cart
+    </button>
+</form>

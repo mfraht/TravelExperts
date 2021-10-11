@@ -1,0 +1,51 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // --------------------------- PACKAGE LIST VIEW ---------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model List<Package>
+
+@{ ViewData["Title"] = "Package List"; }
+
+
+<div class="text-center">
+
+    @*// -------------------- Heading for Package List page ------------------------------ //*@
+    <h1 class="display-4">Package List</h1>
+
+    @*// -------------------- Using data from Package Model ------------------------------ //*@
+    @foreach (var package in Model)
+    {
+        <div class="card mb-4">
+
+            @*// -------------------- Image of the Package ---------------------------------- //*@
+            <a asp-controller="Package" asp-action="Details" asp-route-id="@package.PackageId">
+                <img src="./images/@package.image" class="img-fluid center-block" alt="Responsive image" style="width: fit-content; padding: 10px 100px 0px 100px ; border-radius: 20px 20px 20px 20px">
+            </a>
+    
+            @*// -------------------- Package Details Information ---------------------------------- //*@
+            <div class="card-body">
+                <h5 class="btn btn-primary">
+                    <a asp-controller="Package" asp-action="Details" asp-route-id="@package.PackageId" style="color: white; text-decoration: none;">
+                        @package.PkgName
+                    </a>
+                </h5>
+        
+                <p class="card-text">Start Date: @package.PkgStartDate </p>
+                <p class="card-text"><small class="text-muted">Price @package.PkgBasePrice</small></p>
+            </div>
+
+        </div>
+    }
+
+</div>

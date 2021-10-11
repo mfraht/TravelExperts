@@ -1,0 +1,65 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // -------------------------- PACKAGE DETAILS FROM ADMIN -------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model TravelExperts.Models.PackageViewModel
+
+@{ ViewData["Title"] = " | Package Details"; }
+
+@*// ----------------------------- Heading for Package Details page ---------------------------------- //*@
+
+<h1>Package Details</h1>
+
+@*// --------------------------------- Table for Package List ------------------------------------ //*@
+
+<table>
+
+    @*// ----------------------------- Package Table Header ---------------------------------- //*@
+
+    <thead>
+        <tr>
+            <th scope="col">Package ID</th>
+            <th scope="col">Package Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Base Price</th>
+            <th scope="col">Agency Commission</th>
+        </tr>
+    </thead>
+
+    @*// ----------------------------- Package Table Body ------------------------------------ //*@
+
+    <tbody>
+        <tr>
+            <td>@Model.Package.PackageId</td>
+            <td>@Model.Package.PkgName  </td>
+            <td>@Model.Package.PkgStartDate</td>
+            <td>@Model.Package.PkgEndDate</td>
+            <td>@Model.Package.PkgDesc</td>
+            <td>@Model.Package.PkgBasePrice</td>
+            <td>@Model.Package.PkgAgencyCommission</td>
+        </tr>
+</table>
+
+
+@*// --------------------------- Button for Add to Cart ------------------------------------ //*@
+
+<form asp-action="Add" asp-controller="Cart" method="post">
+
+    <button type="submit" name="id" value="@Model.Package.PackageId" class="btn btn-primary">
+        Add To Cart
+    </button>
+
+</form>

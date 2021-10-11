@@ -1,0 +1,117 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // --------------------------------- REGISTER VIEW -------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model RegisterViewModel
+@{ ViewBag.Title = "Register"; }
+
+@*// ----------------------------- Heading for Register page ---------------------------------- //*@
+
+<h2>Register</h2>
+
+@*// --------------------------- Validation for Register page ---------------------------------- //*@
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+@*// ------------------------------- Form for Register page -------------------------------- //*@
+
+<form method="post" asp-action="Register">
+
+    @*// --------------------------- Textbox for Username ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Username:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Username" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*// --------------------------- Textbox for First Name ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>First Name:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Firstname" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Firstname" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*// --------------------------- Textbox for Last Name ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Last Name:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Lastname" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Lastname" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*// --------------------------- Textbox for Email Address ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Email Address:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Email" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*// --------------------------- Textbox for Password ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Password:</label></div>
+        <div class="col-sm-4">
+            <input type="password" asp-for="Password" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*// ----------------------- Textbox for Confirm Password --------------------------------- //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Confirm Password:</label></div>
+        <div class="col-sm-4">
+            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+        </div>
+    </div>
+
+    @*// ---------------------------- Button for Register ------------------------------------- //*@
+
+    <div class="row">
+        <div class="offset-2 col-sm-4">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+
+    @*// ---------- Hyperlink to redirect to Log in page if the user is already registered ------------- //*@
+
+    <div class="row">
+        <div class="offset-2 col-sm-4">
+            Already registered? <a asp-action="LogIn">Log In</a>
+        </div>
+    </div>
+
+</form>

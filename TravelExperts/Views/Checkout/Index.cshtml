@@ -1,0 +1,128 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ---------------------------- YOUR PURCHASES VIEW ------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model TravelExperts.Models.PurchaseViewModel
+
+@{ ViewData["Title"] = " | Purchases"; }
+
+@*// -------------------- Heading for View Your Purchases page ------------------------------ //*@
+
+<h1>Your Purchases</h1>
+
+@*// -------------------- Box for Displaying Sub-Total ------------------------------ //*@
+    
+<form asp-action="Clear" method="post">
+    <ul class="list-group mb-4">
+        <li class="list-group-item">
+            <div class="row">
+
+                @*// -------------------- SubTotal Data ------------------------------ //*@
+
+                <div class="col">
+                    Subtotal: @Model.Subtotal.ToString("c")
+                </div>
+
+                <div class="col">
+                    <div class="float-right">
+
+                        @*// -------------------- Button for Pay ------------------------------ //*@
+                        <a asp-action="Pay" class="btn btn-primary">Pay</a>
+
+                        @*// -------------------- Button to go Back to Shopping ------------------------------ //*@
+                        <a asp-action="Index" asp-controller="Package" asp-all-route-data="@Model.PackageGridRoute" class="btn btn-primary" style="text-decoration: none;">Back to Shopping</a>
+                    </div>
+                </div>
+
+            </div>
+        </li>
+    </ul>
+</form>
+
+@*// -------------------- Table for Purchase Items ------------------------------ //*@
+
+<form asp-action="Remove" method="post">
+    <table class="table">
+
+        @*// -------------------- Table Header for Purchase Items ----------------------- //*@
+
+        <thead class="thead-dark">
+            <tr>
+                <th>Package ID</th>
+                <th>Package Name</th>
+                <th>Price</th>
+                <th>Number of Travellers</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @*// -------------------- Table Body for Purchase Items ------------------------------ //*@
+
+        <tbody>
+
+            @*// ---------------- Using Data from Purchase Item Model -------------------------- //*@
+
+            @foreach (TravelExperts.Models.DomainModels.PurchaseItem item in Model.List)
+            {
+                <tr>
+
+                    @*// ---------------- Package ID information -------------------------- //*@
+
+                    <td>
+                        <a asp-action="Details" asp-controller="Package"
+                           asp-route-id="@item.Package.PackageId"
+                           asp-route-slug="@item.Package.PkgName.Slug()">
+                            @item.Package.PackageId
+                        </a>
+                    </td>
+
+                    @*// ---------------- Package Name information -------------------------- //*@
+
+                    <td>
+                        <p>
+                            <a asp-action="Details" asp-controller="Package"
+                               asp-route-id="@item.Package.PackageId"
+                               asp-route-slug="@item.Package.PkgName.Slug()">
+                                @item.Package.PkgName
+                            </a>
+                        </p>
+                    </td>
+
+                    <td>@item.Package.PkgBasePrice.ToString("c")</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Subtotal.ToString("c")</td>
+
+                    <td>
+                        <div class="float-right">
+
+                            @*// ---------------- Button for Editing items in the Purchase -------------------------- //*@
+
+                            <a asp-action="Edit" asp-controller="Checkout"
+                               asp-route-id="@item.Package.PackageId"
+                               asp-route-slug="@item.Package.PkgName.Slug()"
+                               class="btn btn-primary">Edit</a>
+
+                            @*// ---------------- Button for Removing items from Purchase -------------------------- //*@
+
+                            <button type="submit" name="id" value="@item.Package.PackageId" class="btn btn-primary">
+                                Remove
+                            </button>
+                        </div>
+                    </td>
+                </tr>            
+            }
+        </tbody>
+    </table>
+</form>

@@ -1,0 +1,168 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ---------------------------- PACKAGE VIEW FROM ADMIN --------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model PackageViewModel
+
+@{  // ------------------------------ PACKAGE VIEW FROM ADMIN ------------------------- //
+    // --------------------------- Used for add, edit, and delete --------------------- //
+    // ----------- Which one is determined by the "action" method name. --------------- //
+
+    var action = ViewContext.RouteData.Values["action"].ToString().Capitalize();
+
+    ViewData["Title"] = $" | {action} Package"; }
+
+
+@*// ----------------------------- Heading for Package Form page -------------------------------- //*@
+
+<h1>@action Package</h1>
+
+
+@*// --------------------------- Form for Adding / Editing Package Data -------------------------- //*@
+
+<form asp-action="@action" asp-area="Admin" method="post">
+
+    <input type="hidden" asp-for="Package.PackageId" />
+
+    @*// --------------------------- Textbox for Package Name ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Package Name:</label></div>
+
+        @*// -------If deleting, display title in a label and put value in hidden field for delete message-------- //*@
+        @*// -------Otherwise, provide a text box ---------------------------------------------------------------- //*@
+
+        @if (Operation.IsDelete(action))
+        {
+            <div class="col-sm-4"><label>@Model.Package.PkgName</label></div>
+                <input type="hidden" asp-for="Package.PkgName" />
+         }
+         else
+         {
+            <div class="col-sm-4">
+                <input type="text" asp-for="Package.PkgName" class="form-control" />
+            </div>
+            <div class="col-sm-6">
+                <span asp-validation-for="Package.PkgName" class="text-danger"></span>
+            </div>
+         }
+    </div>
+
+
+    @*// -------If not deleting, display form for adding / editing Packge List-------- //*@
+    @if (!Operation.IsDelete(action))
+    {
+        @*// -------------------- Textbox for Package Start Date -------------------- //*@
+
+        <div class="form-group row">
+            <div class="col-sm-2"><label>Start Date:</label></div>
+            <div class="col-sm-4">
+                <input type="text" asp-for="Package.PkgStartDate" class="form-control" />
+            </div>
+            <div class="col-sm-6">
+                <span asp-validation-for="Package.PkgStartDate" class="text-danger"></span>
+            </div>
+        </div>
+
+                @*// --------------------------- Textbox for Package End Date --------------------------- //*@
+
+                <div class="form-group row">
+                    <div class="col-sm-2"><label>End Date:</label></div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Package.PkgEndDate" class="form-control" />
+                    </div>
+                    <div class="col-sm-6">
+                        <span asp-validation-for="Package.PkgEndDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                                @*// --------------------------- Textbox for Package Description --------------------------- //*@
+
+                                <div class="form-group row">
+                                    <div class="col-sm-2"><label>Package Description:</label></div>
+                                    <div class="col-sm-4">
+                                        <input type="text" asp-for="Package.PkgDesc" class="form-control" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <span asp-validation-for="Package.PkgDesc" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                                @*// --------------------------- Textbox for Package Base Price --------------------------- //*@
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2"><label>Base Price:</label></div>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" asp-for="Package.PkgBasePrice" class="form-control" />
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <span asp-validation-for="Package.PkgBasePrice" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                                @*// --------------------------- Textbox for Package Agency Commission --------------------------- //*@
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-2"><label>Agency Commision:</label></div>
+                                                                    <div class="col-sm-4">
+                                                                        <input type="text" asp-for="Package.PkgAgencyCommission" class="form-control" />
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <span asp-validation-for="Package.PkgAgencyCommission" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                                @*// --------------------------- Textbox for Package Image --------------------------- //*@
+
+                                                                                <div class="form-group row">
+                                                                                    <div class="col-sm-2"><label>Package Image:</label></div>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input type="text" asp-for="Package.image" class="form-control" />
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <span asp-validation-for="Package.image" class="text-danger"></span>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                                @*// --------------------------- Dropdown List for Areas covered in the Package --------------------------- //*@
+
+                                                                                                <div class="form-group row">
+                                                                                                    <div class="col-sm-2">
+                                                                                                        <label>Area(s):</label><br />
+                                                                                                    </div>
+                                                                                                    <div class="col-sm-4">
+                                                                                                        <select asp-for="SelectedProducts" class="form-control"
+                                                                                                                asp-items='@new MultiSelectList(Model.Products, "ProductId", "ProdName", Model.SelectedProducts)'>
+                                                                                                        </select>
+                                                                                                        (Hold down CTRL or CMD key to select multiple)
+                                                                                                    </div>
+                                                                                                    <div class="col-sm-6">
+                                                                                                        <span asp-validation-for="SelectedProducts" class="text-danger"></span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                
+                                                                                                }
+
+    @*// ---------------------------- Action Button for the form ---------------------------------- //*@
+
+    <div class="row">
+        <div class="col-sm-4 offset-sm-2">
+            <button type="submit" class="btn btn-primary">@action</button>
+
+            @*// -------Return user to main admin page after add or to search page otherwise-------- //*@
+
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>

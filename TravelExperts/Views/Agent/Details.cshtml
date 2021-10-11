@@ -1,0 +1,141 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ---------------------------- TRAVEL AGENT PROFILE ------------------------------ //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model Agent
+
+@{ ViewData["Title"] = " | Agent Profile"; }
+
+
+<div class="tte-right-side-fixed-page">
+
+    @*// ---------------- Background Image for Travel Agent Profile page ------------------------ //*@
+
+    <div class="tte-image-top"><img src="~/images/bora-bora_mini.jpg"></div>
+    
+    <div class="tte-profile-info">
+
+        @*// ----------------------------- Agent Profile Image ---------------------------------- //*@
+
+        <img src="~/images/@Model.AgtPicture" alt="@Model.AgtFirstName">
+
+        @*// ----------------------------- Agent Name & Position -------------------------------- //*@
+        
+        <h1 class="tte-name">@Model.AgtFirstName @Model.AgtLastName</h1>
+        <h5 class="tte-name">@Model.AgtPosition </h5>
+        
+        @*// ----------------------------- Agent Location --------------------------------------- //*@
+
+        <div class="tte-location">
+
+            @if (@Model.AgencyId == 1)
+            {
+                <span> Calgary, AB </span> 
+            }
+            else if (@Model.AgencyId == 2)
+            {
+                <span> Okotoks, AB </span>
+            }
+
+        </div>
+
+        @*// ----------------------------- Agent's Years of Experience ------------------------------- //*@
+
+        <div class="tte-experience"><span>@Model.AgentId+ Years of Experience</span></div>
+        
+        @*// ----------------------------- Agent's Contact Information ------------------------------- //*@
+
+        <div class="tte-contact-container">
+
+            @*// --------- Agent's Phone Number ----------------------------- //*@
+    
+            <a href="tel:@Model.AgtBusPhone" class="tte-phone tte-contact-info">
+                <i class="fa fa-phone"></i> <span>  @Model.AgtBusPhone</span>
+            </a>
+        
+            @*// --------- Agent's Email Address ----------------------------- //*@
+
+            <a href="mailto:@Model.AgtEmail" class="tte-email tte-contact-info">
+                <i class="fa fa-envelope"></i> <span>  @Model.AgtEmail</span>
+            </a>
+        </div>
+    </div>
+
+    <br />
+
+    @*// ----------------------------- Agent's Specialities ------------------------------- //*@
+
+    <div class="tte-agent-title-container">
+        <div><img src="~/images/Speciality.PNG" /></div>
+
+        <div class="tte-text-content">
+            <div class="tte-archive-title">
+                <h2> Specializes in:</h2>
+            </div>
+
+            <h4>
+                <span class="badge badge-info">All Inclusive</span>
+                <span class="badge badge-info">Cruises</span>
+                <span class="badge badge-info">Family Vacations</span>
+                <span class="badge badge-info">Family Vacations</span>
+                <span class="badge badge-info">Travel Insurance</span>
+                <span class="badge badge-info">Hotels</span>
+                <span class="badge badge-info">Tours</span>
+            </h4>
+        </div>
+    </div>
+
+    <br />
+
+    @*// --------------------- Countries Agents have well-travelled in ---------------------- //*@
+
+    <div class="tte-agent-title-container">
+        <div><img src="~/images/Travelled.PNG" /></div>
+
+        <div class="tte-text-content">
+            <div class="tte-archive-title">
+                <h2> Well Travelled in:</h2>
+            </div>
+
+            <h4>
+                <span class="badge badge-info">United States</span>
+                <span class="badge badge-info">Canada</span>
+                <span class="badge badge-info">United Kingdom</span>
+            </h4>
+        </div>
+    </div>
+
+    <br />
+
+    @*// ------------------------------- Languages the Agent speaks ------------------------------ //*@
+
+    <div class="tte-agent-title-container">
+        <div><img src="~/images/Language.PNG" /></div>
+
+        <div class="tte-text-content">
+            <div class="tte-archive-title">
+                <h2> Speaks:</h2>
+            </div>
+
+            <h4>
+                <span class="badge badge-info">English</span>
+                <span class="badge badge-info">French</span>
+            </h4>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+</div>

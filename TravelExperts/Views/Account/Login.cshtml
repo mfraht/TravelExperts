@@ -1,0 +1,81 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // --------------------------------- LOG IN VIEW ---------------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model LoginViewModel
+@{ ViewBag.Title = "Log In"; }
+
+@*// ----------------------------- Heading for Log in page ---------------------------------- //*@
+
+<h2>Login</h2>
+
+@*// ----------------------------- Validation for Log in page ---------------------------------- //*@
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+@*// ------------------------------- Form for Log in page -------------------------------- //*@
+
+<form method="post" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl">
+
+    @*// --------------------------- Textbox for Username ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Username:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Username" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*// --------------------------- Textbox for Password ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Password:</label></div>
+        <div class="col-sm-4">
+            <input type="password" asp-for="Password" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*// --------------------------- Checkbox for Remember Me ------------------------------------ //*@
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-4">
+            <input type="checkbox" title="Remember Me" asp-for="RememberMe" class="form-check-inline" />
+            <label asp-for="RememberMe">Remember Me</label>
+        </div>
+    </div>
+
+    @*// --------------------------- Button for Log in ------------------------------------ //*@
+
+    <div class="row">
+        <div class="offset-2 col-sm-4">
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+    </div>
+
+    @*// ---------- Hyperlink to redirect to Register page if the user is not registered ------------- //*@
+
+    <div class="row">
+        <div class="offset-2 col-sm-4">
+            Not registered? <a asp-action="Register">Register as a new user</a>
+        </div>
+    </div>
+
+</form>

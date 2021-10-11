@@ -1,0 +1,76 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ------------------------- EDIT PURCHASE ITEM VIEW ------------------------------ //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model TravelExperts.Models.DomainModels.PurchaseItem
+
+@{ ViewData["Title"] = " | Edit Cart"; }
+
+@*// ---------------------- Heading for Edit Purchase Item page ---------------------------------- //*@
+
+<h1>Edit Purchase Item</h1>
+
+@*// --------------------------- Form for Edit Purchase Item page -------------------------------- //*@
+
+<form asp-action="Edit" method="post">
+    <ul class="list-group mb-2">
+       
+        @*// ------------------------------- Package Name Row -------------------------------- //*@
+        <li class="list-group-item">@Model.Package.PkgName</li>
+        
+        @*// ------------------------------- Package Price Row ------------------------------- //*@
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-1">
+                    <label>Price:</label>
+                </div>
+                
+                <div class="col">
+                    @Model.Package.PkgBasePrice.ToString("c")
+                </div>
+            </div>
+        </li>
+
+        @*// ---------------------- Dropdown list for Number of Travellers --------------------------- //*@
+        <li class="list-group-item">
+            <div class="form-row">
+                <div class="col-1">
+                    <label asp-for="Quantity">Number of Travellers:</label>
+                </div>
+
+                <div class="col">
+                    <select asp-for="Quantity" class="form-control">
+                        @for (int i = 1; i <= 10; i++)
+                        {
+                            <option>@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    @*// ---------------------- Hidden Package ID ----------------------------- //*@
+    <input type="hidden" asp-for="Package.PackageId" />
+    
+    @*// ---------------------- Hidden Package Name --------------------------- //*@
+    <input type="hidden" asp-for="Package.PkgName" />
+
+    @*// ---------------- Button to Save Edited changes ----------------------- //*@
+    <button type="submit" class="btn btn-primary">Save</button>
+
+    @*// ---------------- Button to Cancel Edited changes ---------------------- //*@
+    <a asp-action="Index" asp-controller="Cart" class="btn btn-primary">Cancel</a>
+
+</form>

@@ -1,0 +1,99 @@
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TravelExperts.Models;
+
+namespace TravelExperts.Controllers
+{
+    public class ProductsSupplierController : Controller
+    {
+        private IRepository<ProductsSupplier> data;
+        public ProductsSupplierController(IRepository<ProductsSupplier> rep)
+        {
+            data = rep;
+        }
+        // GET: ProductsSupplierController
+        public ActionResult Index()
+        {
+            var q = new QueryOptions<ProductsSupplier>();
+            q.OrderBy = p => p.ProductSupplierId;
+            q.Include = "ProductId";
+            q.Include = "SupplierId";
+            //q.Where = s => s.StudentGrade.GradeLevel == "3";
+            var productsSuppliers = data.List(q);
+            return View(productsSuppliers);
+        }
+
+        // GET: ProductsSupplierController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: ProductsSupplierController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: ProductsSupplierController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ProductsSupplierController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: ProductsSupplierController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ProductsSupplierController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: ProductsSupplierController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+}

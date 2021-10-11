@@ -1,0 +1,94 @@
+﻿@*// ---------------------------------------------------------------------------------- //
+    // ------------------------------ AGENT VIEW FROM ADMIN -------------------------- //
+    // -------------------------------------------------------------------------------- //
+
+    /* -------------------------------------------------------------------------------  */
+    /* --------------------------------Mohamed Ibrahim -------------------------------  */
+    /* -----------------------------Student ID: 880883 ----------------------------  */
+    /* -------------------------------Date: 10-10-2021 -------------------------------  */
+    /* -------------------Purpose: THREADED PROJECT OF PROJ-009-004 ------------------  */
+    /* -------------------------------------------------------------------------------  */
+
+    // -------------------------------------------------------------------------------- //*@
+
+
+
+@model List<Agent>
+@{ ViewData["Title"] = "Agent List"; }
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+    // ------------------------------- AGENT VIEW FROM ADMIN -------------------------- //
+    // ----------------------------- to view Agent List Table ------------------------- //
+*@
+
+
+@*// ----------------------------- Heading for Package List page ---------------------------------- //*@
+
+<h1 class="display-4">Agent List</h1>
+
+@*// --------------------------- Button for Adding new Agent ------------------------------------ //*@
+
+<h5 class="mt-1"><a asp-action="Add" class="btn btn-primary">Add an Agent</a></h5>
+
+
+@*// --------------------------------- Table for Agent List ------------------------------------ //*@
+
+<div class="text-center">
+
+    <table class="table table-bordered table-striped table-md">
+
+        @*// ----------------------------- Agent Table Header ---------------------------------- //*@
+
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Agent Name</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Position</th>
+                <th scope="col">Location</th>
+            </tr>
+        </thead>
+
+        @*// ----------------------------- Agent Table Body ------------------------------------ //*@
+
+        <tbody>
+
+            @*// ----------------------------- Using data from Agent Model ---------------------------------- //*@
+
+            @foreach (Agent agent in Model)
+            {
+                <tr>
+                    <td>@agent.AgentId </td>
+                    <td>@agent.AgtFullName</td>
+                    <td>@agent.AgtBusPhone</td>
+                    <td>@agent.AgtEmail </td>
+                    <td>@agent.AgtPosition </td>
+
+                 @if (agent.AgencyId == 1)
+                 {
+                     <td>Calgary, AB </td>
+                 }
+                 else if (agent.AgencyId == 2)
+                 {
+                     <td>Okotoks, AB </td>
+                 }
+                    
+                    @*// ----------------------------- Edit button in Agent List Table ---------------------------------- //*@
+                    
+                    <td>
+                        <a asp-controller="Agent" asp-action="Edit" asp-route-id="@agent.AgentId" class="btn btn-primary">Edit</a>
+                    </td>
+
+                    @*// ----------------------------- Delete button in Agent List Table ---------------------------------- //*@
+
+                    <td>
+                        <a asp-controller="Agent" asp-action="Delete" asp-route-id="@agent.AgentId" class="btn btn-primary">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
