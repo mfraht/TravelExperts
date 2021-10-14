@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelExperts.Models;
 
 namespace TravelExperts.Migrations
 {
     [DbContext(typeof(TravelExpertsContext))]
-    partial class TravelExpertsContextModelSnapshot : ModelSnapshot
+    [Migration("20211011060820_Car")]
+    partial class Car
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
